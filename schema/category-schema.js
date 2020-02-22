@@ -33,7 +33,7 @@ category.virtual('the_all_product', {
    */
 function join() {
   try {
-    this.populate('the-all_product');
+    this.populate('the_all_product');
   }
   catch(err){ throw Error;}
 }
