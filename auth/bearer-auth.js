@@ -10,7 +10,8 @@ module.exports = (req , res , next) =>{
     .then(validUser =>{
       console.log('validUser authbearer token' , validUser);
       req.user = validUser ;
-      console.log(req.user)
+      // console.log(req.user)
+      // console.log("user", user)
       next();
     }).catch(err => next(err));
 };

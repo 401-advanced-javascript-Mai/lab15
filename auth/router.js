@@ -1,22 +1,24 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 const express = require('express');
 const router = express.Router();
 const basicAuth = require('./basic-auth-middleware.js');
 const users = require('../auth/user-model.js');
-const oauth = require('../auth/Oauth-middleware.js')
-const bearerOuth = require('./bearer-auth.js')
+const oauth = require('../auth/Oauth-middleware.js');
+const bearerOuth = require('./bearer-auth.js');
 
 router.use(express.static('./public'));
 
 router.post('/signup', signUp);
 router.post('/signin', basicAuth,bearerOuth, signIn);
 router.get('/user',basicAuth, getUsers);  
-router.get('/oauth',oauth , getoauth)
-router.get('/secret', bearerOuth , getBearer)
+router.get('/oauth',oauth , getoauth);
+router.get('/secret', bearerOuth , getBearer);
 
 
 //////////////////////// /sign up 
+// eslint-disable-next-line no-unused-vars
 function signUp  (req, res , next){
   // console.log('req.body', req.body);
   new users(req.body).save()
@@ -46,12 +48,12 @@ function getUsers(req , res , next){
 }
 
 //////////////// oauth 
- function getoauth( req , res , next){
-    res.status(200).send(req.token);
- }
-  function getBearer(req ,res, next){
-    res.status(200).json(req.user);
-  };
+function getoauth( req , res , next){
+  res.status(200).send(req.token);
+}
+function getBearer(req ,res, next){
+  res.status(200).json(req.user);
+}
 
 
 

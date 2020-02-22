@@ -5,17 +5,19 @@ const express = require('express');
 const products = require('../model/product-model.js');
 
 const router = express.Router();
+const accessControlList = require('../auth/acl-middleware.js');
+const basicAuth = require('../auth/basic-auth-middleware.js');
 
 // products api routes for CRUD method
 
 // Routes
 router.get('/products', getProducts);
 router.get('/products/:_id', geByIdtProduct);
-router.post('/products', postProducts);
-router.put('/products/:_id', updateProducts);
-router.delete('/products/:_id', deleteProducts);
+router.post('/products', basicAuth , accessControlList('create') , postProducts);
+router.put('/products/:_id', basicAuth , accessControlList('update') , updateProducts);
+router.delete('/products/:_id', basicAuth , accessControlList('delete') , deleteProducts);
 
-let product = new products
+let product = new products;
 
 /**
  * This function get the information after acsses route and send the result as object 

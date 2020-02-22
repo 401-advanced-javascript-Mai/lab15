@@ -5,7 +5,7 @@
 
 const mongoose = require('mongoose');
 // require the product schema 
-require('./product-schema.js')
+require('./product-schema.js');
 /**
  * this is the schema for category 
  * place where we handle the information and organized
