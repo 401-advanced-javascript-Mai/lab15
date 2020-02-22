@@ -1,15 +1,16 @@
-// 'use strict' ;
-// const users = require('./users.js');
+'use strict' ;
+const users = require('./user-model.js');
 
-// module.exports = (req , res , next) =>{
+module.exports = (req , res , next) =>{
 
-//   if (!req.headers.authorization){(e) =>{console.log(e);};}
-//   let token = req.headers.authorization.split(' ').pop();
+  if (!req.headers.authorization){(e) =>{console.log(e);};}
+  let token = req.headers.authorization.split(' ').pop();
 
-//   users.authbearerToken(token)
-//     .then(validUser =>{
-//       console.log('validUser authbearer token' , validUser);
-//       req.user = validUser ;
-//       next();
-//     }).catch(err => next(err));
-// };
+  users.authbearerToken(token)
+    .then(validUser =>{
+      console.log('validUser authbearer token' , validUser);
+      req.user = validUser ;
+      console.log(req.user)
+      next();
+    }).catch(err => next(err));
+};
