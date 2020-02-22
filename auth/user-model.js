@@ -35,6 +35,21 @@ users.statics.authenticateBasic = async function(user, password) {
 };
 
 
+//////// bearer auth /////
+users.statics.authbearerToken = async function(token) {
+    try {
+      let tokenObject = await jwt.verify(token, SECRET);
+  
+      if (tokenObject) {
+          console.log('tokenObject' , tokenObject)
+        return Promise.resolve(tokenObject);
+      } else {
+        return Promise.reject();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 //   Method to generate a Token following a valid login
 users.statics.generateToken = function(user) {

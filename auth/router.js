@@ -4,11 +4,16 @@ const express = require('express');
 const router = express.Router();
 const basicAuth = require('./basic-auth-middleware.js');
 const users = require('../auth/user-model.js');
+const oauth = require('../auth/Oauth-middleware.js')
 
+router.use(express.static('./public'));
 
 router.post('/signup', signUp);
 router.post('/signin', basicAuth, signIn);
 router.get('/user',basicAuth, getUsers);  
+router.get('/oauth',oauth , (req, res) => {
+    res.status(200).send(req.token);
+  }); 
 
 
 
@@ -40,6 +45,11 @@ function getUsers(req , res , next){
       res.status(200).send(records );
     });   
 }
+
+//////////////// oauth 
+ function getoauth( req , res , next){
+    res.status(200).send(req.token);
+ }
 
 
 
